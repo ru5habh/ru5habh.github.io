@@ -35,12 +35,22 @@
         xhr.addEventListener("readystatechange", processRequest, false);
             });
             
-             $("#request").click(function(event){
-                 alert("using getJSON")
-               $.getJSON("https://kitchencop.herokuapp.com/recalls/1.json", function(jd) {
-                  alert(jd);
-               });
-            }); 
+            var jqxhr = function () {
+            $.getJSON( "http://kitchencop.herokuapp.com/recalls/1.json", function(jd) {
+			  alert("ID:"+jd.product_id+"   Reason:"+jd.reason);
+			})
+			  .done(function() {
+			    alert( "second success" );
+			  })
+			  .fail(function() {
+			    alert( "error" );
+			  })
+			  .always(function() {
+			    alert( "complete" );
+			  });
+			  }
+              $("#request").click(jqxhr);
+            
             $("#reqq").click(function(){
                             alert("using XMLHttpRequest");
                             var xhr = new XMLHttpRequest();
